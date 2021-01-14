@@ -5,7 +5,7 @@ export default function Dashboard() {
   const {container} = styles;
   return (
     <View style={container}>
-      <Text>Dashboard</Text>
+      <Text style={{fontWeight: 'bold', fontSize: 24}}>Hello World!</Text>
     </View>
   );
 }

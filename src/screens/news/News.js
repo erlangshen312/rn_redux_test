@@ -15,8 +15,9 @@ import {
 } from '../../services/colors/colors';
 
 export default function News({navigation}) {
-  const {container} = styles;
   const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
   const getNews = async () => {
     const res = await axios.get(
       'https://newsapi.org/v2/top-headlines?country=us&apiKey=0fabdbaaa4a14cad8f4b59940fb0b9d6',
@@ -26,13 +27,29 @@ export default function News({navigation}) {
 
   useEffect(() => {
     getNews();
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
   }, []);
 
-  console.warn(data);
+  if (isLoading) {
+    return (
+      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+        <Text
+          style={{
+            textAlign: 'center',
+          }}>
+          Loading ...
+        </Text>
+      </View>
+    );
+  }
+
   return (
     <FlatList
+      style={{marginTop: 40}}
       data={data}
-      keyExtractor={(item, index) => index}
+      keyExtractor={(item, index) => index.toString()}
       showsVerticalScrollIndicator={false}
       renderItem={({item}) => {
         return (
@@ -99,11 +116,3 @@ export default function News({navigation}) {
     />
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});

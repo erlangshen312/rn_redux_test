@@ -14,7 +14,10 @@ import {snack} from '../../services/snack/snackbar';
 
 const Login = ({isAuth, checkIsLogin}) => {
   const [isCredential, setIsCredential] = useState(false);
-  const [credentials, setCredentials] = useState({email: '', password: ''});
+  const [credentials, setCredentials] = useState({
+    email: 'Admin',
+    password: '12345',
+  });
   const {email, password} = credentials;
 
   const onSubmit = async () => {
